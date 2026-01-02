@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multi-LLM Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input {
+            width: 400px;
+            padding: 6px;
+        }
+        button {
+            padding: 6px 14px;
+        }
+        .answer {
+            border: 1px solid #ccc;
+            padding: 12px;
+            margin-top: 12px;
+        }
+        .best {
+            border-color: green;
+            background-color: #eaffea;
+        }
+        #status {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Enter your query</h2>
+
+<input id="query" type="text" placeholder="Explain Newton's first law in simple terms">
+<button onclick="sendQuery()">Analyze</button>
+
+<div id="status"></div>
+<div id="results"></div>
+
+<script>
+function sendQuery() {
+    const query = document.getElementById("query").value;
+    const statusDiv = document.getElementById("status");
+    const resultsDiv = document.getElementById("results");
+
+    statusDiv.textContent = "⏳ Waiting for backend...";
+    resultsDiv.innerHTML = "";
+
+    fetch("/analyze", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ query })
+    })
+    .then(async res => {
+        const text = await res.text();
+        console.log("RAW RESPONSE:", text);
+
+        if (!res.ok) {
+            throw new Error(`HTTP ${res.status}`);
+        }
+
+        return JSON.parse(text);
+    })
+    .then(data => {
+        statusDiv.textContent = "";
+
+        data.answers.forEach(ans => {
+            const div = document.createElement("div");
+            div.className = "answer";
+
+            if (data.best_agents.some(a => a.agent === ans.agent)) {
+                div.classList.add("best");
+            }
+
+            div.innerHTML = `
+                <strong>${ans.agent}</strong><br><br>
+                ${ans.response}<br><br>
+                <em>Score: ${ans.score}</em><br>
+                <small>Time: ${ans.time}s | Status: ${ans.status}</small>
+            `;
+
+            resultsDiv.appendChild(div);
+        });
+    })
+    .catch(err => {
+        console.error(err);
+        statusDiv.textContent = "⚠ Frontend error — check console";
+    });
+}
+</script>
+
+</body>
+</html>
