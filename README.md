@@ -80,7 +80,8 @@ python app.py
 Open your browser and visit:
 http://127.0.0.1:5000
 
-##🧪 How to Use
+
+## 🧪 How to Use
 
 Enter a factual query (e.g. Who invented the incandescent light bulb?)
 
@@ -96,7 +97,7 @@ Rank responses
 
 Highlight the most reliable answer
 
-##🧠 Why This Project?
+## 🧠 Why This Project?
 
 Large Language Models often:
 
@@ -108,7 +109,7 @@ Sound confident even when incorrect
 
 This project evaluates truth-likelihood, not fluency.
 
-##🔮 Future Improvements
+## 🔮 Future Improvements
 
 Dynamic knowledge base integration
 
