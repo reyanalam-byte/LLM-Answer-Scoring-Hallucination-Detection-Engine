@@ -50,7 +50,7 @@ ollama serve
 
 2️⃣ Clone the Repository
 
-git clone https://github.com/reyanalam-byte/hallucination-model.git
+git clone https://github.com/reyanalam-byte/LLM-Answer-Scoring-Hallucination-Detection-Engine.git
 cd hallucination-model
 
 3️⃣ Create and Activate Virtual Environment (Recommended)
