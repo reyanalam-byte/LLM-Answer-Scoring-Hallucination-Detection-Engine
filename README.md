@@ -46,48 +46,42 @@ Follow the steps below in order.
 
 Start Ollama:
 
-```bash
 ollama serve
+
 2️⃣ Clone the Repository
-bash
-Copy code
+
 git clone https://github.com/YOUR_USERNAME/hallucination-model.git
 cd hallucination-model
+
 3️⃣ Create and Activate Virtual Environment (Recommended)
-bash
-Copy code
+
 python -m venv .venv
+
 Windows
-
-bash
-Copy code
 .venv\Scripts\activate
-Linux / macOS
 
-bash
-Copy code
+Linux / macOS
 source .venv/bin/activate
+
 4️⃣ Install Python Dependencies
-bash
-Copy code
+
 pip install -r requirements.txt
 python -m spacy download en_core_web_sm
+
 5️⃣ Download Required Models
-bash
-Copy code
+
 ollama pull phi3
 ollama pull qwen2.5:1.5b
 ollama pull deepseek-r1:1.5b
+
 6️⃣ Run the Application
-bash
-Copy code
+
 python app.py
 Open your browser and visit:
-
-cpp
-Copy code
 http://127.0.0.1:5000
-🧪 How to Use
+
+##🧪 How to Use
+
 Enter a factual query (e.g. Who invented the incandescent light bulb?)
 
 Click Analyze
@@ -102,7 +96,8 @@ Rank responses
 
 Highlight the most reliable answer
 
-🧠 Why This Project?
+##🧠 Why This Project?
+
 Large Language Models often:
 
 Hallucinate facts
@@ -113,7 +108,8 @@ Sound confident even when incorrect
 
 This project evaluates truth-likelihood, not fluency.
 
-🔮 Future Improvements
+##🔮 Future Improvements
+
 Dynamic knowledge base integration
 
 Topic-agnostic scoring
